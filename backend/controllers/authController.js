@@ -31,6 +31,26 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
     sendToken(user, 200, res)
 
+    //send email to new user
+    const message = 'Welcome new ShopIT. You are receiving this message because of a successful sign-in. Thanks'
+
+    try {
+
+        await sendEmail({
+            email: user.email,
+            subject: 'Welcome to our ShopIT',
+            message
+        })
+
+        res.status(200).json({
+            success: true,
+            message: `Email sent to: ${user.email}`
+        })
+
+    } catch (e) {
+        console.log(e.message)
+    }
+
 })
 
 // Login User  =>  /api/v1/login

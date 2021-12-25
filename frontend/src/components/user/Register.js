@@ -33,6 +33,7 @@ const Register = ({ history }) => {
     useEffect(() => {
 
         if (isAuthenticated) {
+            alert.success('Account create successfully')
             history.push('/')
         }
 
